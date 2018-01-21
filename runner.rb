@@ -1,14 +1,15 @@
 require 'unirest'
+require 'paint'
 
 system "clear"
 
-puts "Welcome to my Contacts application!"
-puts "Choose an option below:"
-puts "     [1] Show all contacts"
-puts "     [2] Show one contact"
-puts "     [3] Update a contact"
-puts "     [4] Create a new contact"
-puts "     [5] Delete a contact"
+puts Paint["Welcome to my Contacts application!".center(70), :red, :blue]
+puts Paint["Choose an option below:".center(70), :red, :blue]
+puts Paint["[1] Show all contacts".ljust(70), :red, :blue]
+puts Paint["[2] Show one contact".ljust(70), :red, :blue]
+puts Paint["[3] Update a contact".ljust(70), :red, :blue]
+puts Paint["[4] Create a new contact".ljust(70), :red, :blue]
+puts Paint["[5] Delete a contact".ljust(70), :red, :blue]
 
 input_option = gets.chomp
 
@@ -25,7 +26,7 @@ elsif input_option == "2"
   puts JSON.pretty_generate(contact)
 elsif input_option == "3"
   system 'clear'
-  print "Which Contact do you want to update? Enter ID: "
+  print Paint["Which Contact do you want to update? Enter ID: ", :red, :blue]
   input_id = gets.chomp
   response = Unirest.get("http://localhost:3000/contacts/#{input_id}")
   contact = response.body
