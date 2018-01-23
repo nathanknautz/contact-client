@@ -35,10 +35,14 @@ elsif input_option == "3"
   contact_data[:first_name] = gets.chomp
   print "Last Name (#{contact["last_name"]}): "
   contact_data[:last_name] = gets.chomp
+  print "Middle Name (#{contact["middle_name"]}): "
+  contact_data[:middle_name] = gets.chomp
   print "Email (#{contact["email"]}): "
   contact_data[:email] = gets.chomp
   print "Phone Number (#{contact["phone_number"]}): "
   contact_data[:phone_number] = gets.chomp
+  print "Bio(#{contact["bio"]}): "
+  contact_data[:bio] = gets.chomp
   contact_data.delete_if {|k,v| v.empty?}
   response = Unirest.patch("http://localhost:3000/contacts/#{input_id}",
                             parameters: contact_data)
@@ -49,10 +53,14 @@ elsif input_option == "3"
     contact_data[:first_name] = gets.chomp
     print "Enter the last name: "
     contact_data[:last_name] = gets.chomp
+    print "Middle Name: "
+    contact_data[:middle_name] = gets.chomp
     print "Enter the email: "
     contact_data[:email] = gets.chomp
     print "Enter the phone number: "
     contact_data[:phone_number] = gets.chomp
+    print "Bio: "
+    contact_data[:bio] = gets.chomp
     response = Unirest.post("http://localhost:3000/contacts",
                             parameters: contact_data)
   elsif input_option == "5"
