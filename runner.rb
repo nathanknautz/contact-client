@@ -46,6 +46,15 @@ elsif input_option == "3"
   contact_data.delete_if {|k,v| v.empty?}
   response = Unirest.patch("http://localhost:3000/contacts/#{input_id}",
                             parameters: contact_data)
+  if response.code == 200
+    contact_data = response.body 
+    puts JSON.pretty_generate(contact_data)
+  else
+    errors = response.body
+    errors.each do |error|
+      puts error 
+    end
+  end
   elsif input_option == "4"
     system "clear"
     contact_data = {}
@@ -63,6 +72,15 @@ elsif input_option == "3"
     contact_data[:bio] = gets.chomp
     response = Unirest.post("http://localhost:3000/contacts",
                             parameters: contact_data)
+    if response.code == 200
+      contact_data = response.body 
+      puts JSON.pretty_generate(contact_data)
+    else
+      errors = response.body
+      errors.each do |error|
+        puts error 
+      end
+    end
   elsif input_option == "5"
     system "clear"
     print "Which contact do you want to delete? ID: "
