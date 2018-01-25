@@ -6,7 +6,8 @@ system "clear"
 puts Paint["Welcome to my Contacts application!".center(70), :red, :blue]
 puts Paint["Choose an option below:".center(70), :red, :blue]
 puts Paint["[1] Show all contacts".ljust(70), :red, :blue]
-puts Paint[   "[1.1] Search contacts".ljust(70), :red, :blue]
+puts Paint["  [1.1] Search contacts".ljust(70), :red, :blue]
+puts Paint["  [1.2] Sort all contacts".ljust(70), :red, :blue]
 puts Paint["[2] Show one contact".ljust(70), :red, :blue]
 puts Paint["[3] Update a contact".ljust(70), :red, :blue]
 puts Paint["[4] Create a new contact".ljust(70), :red, :blue]
@@ -22,6 +23,12 @@ elsif input_option == "1.1"
   print "Enter search term: "
   search_term = gets.chomp
   response = Unirest.get("http://localhost:3000/contacts?search=#{search_term}")
+  contacts = response.body 
+  puts JSON.pretty_generate(contacts)
+elsif input_option == "1.2"
+  print "Sort on: "
+  sort_value = gets.chomp
+  response = Unirest.get("http://localhost:3000/contacts?sort=#{sort_value}")
   contacts = response.body 
   puts JSON.pretty_generate(contacts)
 elsif input_option == "2"
